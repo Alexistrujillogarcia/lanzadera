@@ -1,0 +1,193 @@
+{
+  "version": 1,
+  "producto": {
+    "id": "demo-ahorro-90",
+    "nombre": "Ahorro 90 (DEMO)",
+    "tema": "Plan de ahorro en 90 días",
+    "nicho": "finanzas personales",
+    "publico": "adultos 25-45 sin conocimientos financieros",
+    "idioma": "es",
+    "descripcion": "Contenido de demostración de la plantilla. Se sustituye por el contenido generado desde tu PDF."
+  },
+  "onboarding": {
+    "intro": "Responde 3 preguntas rápidas y adaptamos el plan a tu situación.",
+    "preguntas": [
+      {
+        "id": "ob1",
+        "texto": "¿Cuánto consigues ahorrar al mes ahora mismo?",
+        "opciones": [
+          { "texto": "Nada, llego muy justo", "enfasis": ["m1"] },
+          { "texto": "Algo, pero sin constancia", "enfasis": ["m1"] },
+          { "texto": "Ahorro, pero sin un plan claro", "enfasis": ["m2"] }
+        ]
+      },
+      {
+        "id": "ob2",
+        "texto": "¿Sabes en qué se te va el dinero cada mes?",
+        "opciones": [
+          { "texto": "Ni idea, desaparece solo", "enfasis": ["m1"] },
+          { "texto": "Más o menos", "enfasis": ["m1"] },
+          { "texto": "Sí, lo tengo controlado", "enfasis": ["m2"] }
+        ]
+      },
+      {
+        "id": "ob3",
+        "texto": "¿Para qué quieres ahorrar?",
+        "opciones": [
+          { "texto": "Un colchón de emergencia", "enfasis": ["m2"] },
+          { "texto": "Un objetivo concreto (viaje, coche...)", "enfasis": ["m2"] },
+          { "texto": "Dejar de agobiarme a fin de mes", "enfasis": ["m1"] }
+        ]
+      }
+    ]
+  },
+  "herramienta": {
+    "tipo": "calculadora",
+    "titulo": "Calculadora 50/30/20",
+    "descripcion": "Introduce tus ingresos y descubre cuánto deberías destinar a cada cosa este mes.",
+    "calculadora": {
+      "campos": [
+        { "id": "ingresos", "etiqueta": "Ingresos netos al mes", "tipo": "numero", "unidad": "€", "min": 0, "placeholder": "1500" }
+      ],
+      "resultados": [
+        { "etiqueta": "Necesidades (50%)", "formula": "ingresos * 0.5", "unidad": "€" },
+        { "etiqueta": "Caprichos (30%)", "formula": "ingresos * 0.3", "unidad": "€" },
+        { "etiqueta": "Ahorro (20%)", "formula": "ingresos * 0.2", "unidad": "€", "destacado": true }
+      ],
+      "nota": "Regla 50/30/20: la referencia clásica para repartir tus ingresos sin hacer cuentas complicadas."
+    }
+  },
+  "modulos": [
+    {
+      "id": "m1",
+      "titulo": "Descubre a dónde va tu dinero",
+      "descripcion": "El primer paso no es ahorrar: es ver con claridad.",
+      "icono": "🔍",
+      "pantallas": [
+        {
+          "id": "m1p1",
+          "tipo": "texto",
+          "titulo": "El agujero invisible",
+          "html": "<p>La mayoría de la gente no tiene un problema de ingresos: tiene un problema de <strong>visibilidad</strong>.</p><p>Antes de recortar nada, durante los próximos 7 días vas a apuntar cada gasto. Sin juzgarte. Solo mirar.</p>"
+        },
+        {
+          "id": "m1p2",
+          "tipo": "checklist",
+          "titulo": "Tu radiografía en 5 pasos",
+          "intro": "Marca cada paso cuando lo completes. Se guarda automáticamente.",
+          "items": [
+            "Revisa los movimientos del último mes en tu banco",
+            "Apunta tus 3 gastos fijos más grandes",
+            "Detecta 2 suscripciones que ya no usas",
+            "Suma lo que gastaste en comida a domicilio",
+            "Escribe tu gasto 'hormiga' más repetido"
+          ]
+        },
+        {
+          "id": "m1p3",
+          "tipo": "swipe_cards",
+          "titulo": "Ideas para grabar a fuego",
+          "intro": "Desliza las tarjetas. Toca para ver el reverso.",
+          "cards": [
+            { "frente": "Lo que no se mide...", "dorso": "...no se puede mejorar. Tu primera semana es solo de observación." },
+            { "frente": "Gasto hormiga", "dorso": "3 € al día en cualquier cosa son 1.095 € al año. No es el café: es el patrón." },
+            { "frente": "Regla de las 48 horas", "dorso": "Ante cualquier compra no esencial, espera 48 h. La mitad de las veces ya no la querrás." }
+          ]
+        }
+      ],
+      "quiz": {
+        "preguntas": [
+          {
+            "texto": "¿Cuál es el primer paso del plan?",
+            "opciones": ["Recortar todos los gastos", "Observar y apuntar sin juzgar", "Abrir una cuenta remunerada"],
+            "correcta": 1,
+            "explicacion": "Antes de cambiar nada necesitas visibilidad: una semana apuntando cada gasto."
+          },
+          {
+            "texto": "Un gasto hormiga de 3 € al día equivale al año a...",
+            "opciones": ["Unos 300 €", "Unos 1.100 €", "Unos 90 €"],
+            "correcta": 1,
+            "explicacion": "3 € × 365 días = 1.095 €. El problema no es el importe, es la repetición."
+          },
+          {
+            "texto": "¿Qué es la regla de las 48 horas?",
+            "opciones": ["Esperar 2 días antes de una compra no esencial", "Revisar el banco cada 2 días", "Ahorrar 48 € a la semana"],
+            "correcta": 0,
+            "explicacion": "Esperar 48 h desactiva la compra impulsiva: la mitad de las veces el deseo desaparece."
+          }
+        ]
+      }
+    },
+    {
+      "id": "m2",
+      "titulo": "Tu plan 50/30/20",
+      "descripcion": "Reparte tus ingresos con una regla simple que funciona.",
+      "icono": "📊",
+      "pantallas": [
+        {
+          "id": "m2p1",
+          "tipo": "texto",
+          "titulo": "La regla que lo simplifica todo",
+          "html": "<p>Divide tus ingresos netos en tres cajas: <strong>50% necesidades</strong>, <strong>30% caprichos</strong> y <strong>20% ahorro</strong>.</p><p>No hace falta una hoja de cálculo: hace falta una regla que puedas cumplir.</p>"
+        },
+        {
+          "id": "m2p2",
+          "tipo": "calculadora",
+          "titulo": "Calcula tu reparto",
+          "calculadora": {
+            "campos": [
+              { "id": "ingresos", "etiqueta": "Ingresos netos al mes", "tipo": "numero", "unidad": "€", "min": 0, "placeholder": "1500" },
+              { "id": "fijos", "etiqueta": "Gastos fijos actuales", "tipo": "numero", "unidad": "€", "min": 0, "placeholder": "900" }
+            ],
+            "resultados": [
+              { "etiqueta": "Tu tope de necesidades (50%)", "formula": "ingresos * 0.5", "unidad": "€" },
+              { "etiqueta": "Diferencia con tus fijos actuales", "formula": "ingresos * 0.5 - fijos", "unidad": "€", "destacado": true }
+            ],
+            "nota": "Si la diferencia sale negativa, tus gastos fijos superan el 50%: ahí está tu primer objetivo."
+          }
+        },
+        {
+          "id": "m2p3",
+          "tipo": "checklist",
+          "titulo": "Pon el plan en marcha",
+          "items": [
+            "Calcula tu 20% de ahorro mensual",
+            "Programa una transferencia automática el día de cobro",
+            "Abre una cuenta separada solo para el ahorro",
+            "Decide tu primer objetivo con fecha"
+          ]
+        }
+      ],
+      "quiz": {
+        "preguntas": [
+          {
+            "texto": "En la regla 50/30/20, el 20% se destina a...",
+            "opciones": ["Caprichos", "Ahorro", "Necesidades"],
+            "correcta": 1,
+            "explicacion": "El 20% va directo a ahorro, idealmente con transferencia automática el día de cobro."
+          },
+          {
+            "texto": "¿Cuál es el mejor momento para apartar el ahorro?",
+            "opciones": ["A final de mes, con lo que sobre", "El día de cobro, de forma automática", "Cuando haya un extra"],
+            "correcta": 1,
+            "explicacion": "Si esperas a fin de mes, no sobra. Páganos primero: automatiza el ahorro el día de cobro."
+          },
+          {
+            "texto": "Si tus gastos fijos superan el 50% de tus ingresos...",
+            "opciones": ["Es imposible ahorrar", "Ahí está tu primer objetivo de ajuste", "Debes ignorar la regla"],
+            "correcta": 1,
+            "explicacion": "La regla te da el diagnóstico: reducir fijos (o subir ingresos) es tu primera meta."
+          }
+        ]
+      }
+    }
+  ],
+  "certificado": {
+    "titulo": "Certificado de finalización",
+    "texto": "Ha completado con éxito el programa completo y cuenta con un plan de ahorro personal en marcha."
+  },
+  "compartir": {
+    "texto": "Estoy siguiendo este plan de ahorro en 90 días y se nota. Pruébalo aquí:",
+    "url": ""
+  }
+}
