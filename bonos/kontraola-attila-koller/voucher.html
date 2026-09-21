@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Bono Regalo Kontraola</title>
+<link rel="stylesheet" href="fonts.css">
+<style>
+  @page { size: A4 portrait; margin: 0; }
+  :root{
+    --navy:#0B1B2B; --navy2:#10263B; --orange:#F47B20; --orange2:#FF9A3C;
+    --sand:#F6EFE6; --muted:#9FB3C8; --line:rgba(255,255,255,.14);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:210mm;height:297mm;background:var(--navy);}
+  body{font-family:'Montserrat',sans-serif;color:#fff;-webkit-font-smoothing:antialiased;overflow:hidden;position:relative}
+  .page{position:relative;width:210mm;height:297mm;overflow:hidden;background:var(--navy)}
+
+  /* HERO */
+  .hero{position:absolute;inset:0 0 auto 0;height:138mm;overflow:hidden}
+  .hero img.photo{width:100%;height:100%;object-fit:cover;object-position:50% 45%;display:block}
+  .hero::after{content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(11,27,43,.05) 0%,rgba(11,27,43,0) 35%,rgba(11,27,43,.55) 70%,var(--navy) 100%)}
+  .hero::before{content:"";position:absolute;inset:0;z-index:1;
+    background:linear-gradient(90deg,rgba(11,27,43,.45) 0%,rgba(11,27,43,0) 45%)}
+  .badge{position:absolute;top:10mm;left:12mm;width:36mm;height:36mm;z-index:3;
+    filter:drop-shadow(0 4mm 6mm rgba(0,0,0,.45))}
+  .tag{position:absolute;top:13mm;right:12mm;z-index:3;background:var(--orange);color:#fff;
+    font-weight:700;font-size:8.5pt;letter-spacing:.22em;text-transform:uppercase;padding:3.2mm 5.5mm;border-radius:999px;
+    box-shadow:0 3mm 8mm rgba(0,0,0,.35)}
+  .hero-text{position:absolute;left:12mm;right:12mm;bottom:12mm;z-index:3}
+  .kicker{font-size:9.5pt;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--orange2);margin-bottom:2mm}
+  h1{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:62pt;line-height:.9;letter-spacing:.02em;color:#fff;
+    text-shadow:0 3mm 10mm rgba(0,0,0,.45)}
+  h1 span{color:var(--orange)}
+  .sub{margin-top:3mm;font-size:12pt;font-weight:500;color:#EAF1F8;letter-spacing:.04em}
+
+  /* TICKET CUT */
+  .cut{position:absolute;top:138mm;left:0;right:0;height:0;border-top:0.5mm dashed rgba(255,255,255,.22);z-index:4}
+  .cut::before,.cut::after{content:"";position:absolute;top:-5mm;width:10mm;height:10mm;border-radius:50%;background:#071220}
+  .cut::before{left:-5mm}.cut::after{right:-5mm}
+
+  /* BODY */
+  .body{position:absolute;top:138mm;left:0;right:0;bottom:0;padding:12mm 12mm 0 12mm;
+    background:radial-gradient(120% 60% at 100% 100%,rgba(244,123,32,.16) 0%,rgba(244,123,32,0) 60%),var(--navy)}
+  .label{font-size:8.5pt;font-weight:700;letter-spacing:.32em;text-transform:uppercase;color:var(--orange2)}
+  .name{font-family:'Bebas Neue',sans-serif;font-size:52pt;line-height:.95;letter-spacing:.03em;color:#fff;margin-top:1.5mm}
+  .dream{font-family:'Caveat',cursive;font-weight:700;font-size:30pt;line-height:1;color:var(--orange2);margin-top:1.5mm;transform:rotate(-2deg);transform-origin:left center;display:inline-block}
+  .from{margin-top:5mm;display:flex;align-items:baseline;gap:4mm;white-space:nowrap}
+  .from .who{font-size:17pt;font-weight:600;color:#fff}
+  .from .note{font-size:9.5pt;color:var(--muted);font-weight:500}
+
+  .grid{margin-top:6mm;display:grid;grid-template-columns:1fr 1fr;gap:4mm}
+  .card{border:0.35mm solid var(--line);border-radius:4mm;padding:4.5mm 6mm;background:rgba(255,255,255,.035)}
+  .card.wide{grid-column:1/3}
+  .card .l{font-size:7.5pt;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--muted);margin-bottom:2mm}
+  .card .v{font-size:13pt;font-weight:600;color:#fff;line-height:1.25}
+  .card .v small{display:block;font-size:9pt;font-weight:500;color:var(--muted);margin-top:1mm}
+  .card .v b{color:var(--orange2);font-weight:700}
+  .phone{font-family:'Bebas Neue',sans-serif;font-size:24pt;letter-spacing:.06em;color:#fff;line-height:1}
+  .phone span{color:var(--orange)}
+
+  .footer{position:absolute;left:12mm;right:12mm;bottom:10mm;display:flex;align-items:flex-end;justify-content:space-between;
+    border-top:0.35mm solid var(--line);padding-top:4mm}
+  .footer img{height:10mm;display:block}
+  .footer .web{text-align:right;font-size:8.5pt;color:var(--muted);line-height:1.6;font-weight:500}
+  .footer .web b{color:#fff;font-weight:600;letter-spacing:.06em}
+  .serial{position:absolute;right:12mm;top:12mm;text-align:right;font-size:7.5pt;letter-spacing:.2em;color:var(--muted);font-weight:600}
+  .serial b{display:block;color:#fff;font-size:9pt;letter-spacing:.25em;margin-top:.5mm}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="hero">
+    <img class="photo" src="photo_duo.jpg" alt="">
+    <img class="badge" src="badge.png" alt="Kontraola Surf School">
+    <div class="tag">Bono regalo · Gift voucher</div>
+    <div class="hero-text">
+      <div class="kicker">Kontraola Escuela de Surf · Tenerife</div>
+      <h1>Group surf <span>lesson</span></h1>
+      <div class="sub">Clase de surf en grupo · Una sesión para vivir tu primera ola</div>
+    </div>
+  </div>
+  <div class="cut"></div>
+
+  <div class="body">
+    <div class="serial">Nº BONO / VOUCHER<b>KO-2026-0921-AK</b></div>
+    <div class="label">Para · For</div>
+    <div class="name">Attila Koller</div>
+    <div class="dream">Dreams come true</div>
+
+    <div class="from">
+      <div class="label" style="letter-spacing:.32em">De · From</div>
+      <div class="who">Mihaly Meszaros</div>
+      <div class="note">— un regalo de un buen amigo · a gift from a good friend</div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <div class="l">Válido hasta · Valid until</div>
+        <div class="v">21 · 12 · 2026<small>3 meses desde el 21/09/2026 · 3 months from 21/09/2026</small></div>
+      </div>
+      <div class="card">
+        <div class="l">Incluye · Includes</div>
+        <div class="v">1 clase de surf en grupo<small>1 group surf lesson · Kontraola Surf School</small></div>
+      </div>
+      <div class="card wide">
+        <div class="l">Cómo reservar · How to book</div>
+        <div class="v" style="display:flex;align-items:center;justify-content:space-between;gap:6mm">
+          <div style="font-size:10pt;font-weight:500;line-height:1.4;color:#EAF1F8">
+            Contacta con Kontraola para elegir el día y la hora de tu clase.<br>
+            <span style="color:var(--muted)">Contact Kontraola Surf School to choose the day and time of your lesson.</span>
+          </div>
+          <div class="phone" style="white-space:nowrap">Tel · WhatsApp<br><span>629 629 301</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <img src="wordmark_light.png" alt="Kontraola Escuela Surf School">
+      <div class="web"><b>www.kontraolasurftenerife.com</b><br>Kontraola Surf · Tenerife · Bono personal e intransferible</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
