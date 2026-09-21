@@ -1,7 +1,19 @@
 # Plan: propuesta al Ayuntamiento + presentación interactiva de las unidades
 
-Estado: **pendiente de recibir las unidades/presentaciones originales** (no están en el
-repo, en Drive, en Gmail ni en Gamma). En cuanto lleguen se ejecuta la fase 2.
+> **Estado a 2026-09-21 — fase 1 terminada.** Las 7 presentaciones originales ya están
+> en `unidades/` (con el texto extraído en `unidades/texto/*.md`). Construidos:
+>
+> - `presentacion/` — motor completo con la **Unidad 1 real** (15 diapositivas). Las
+>   unidades 2 a 7 están en el menú como «Próximamente» (`pendiente: true`), listas
+>   para rellenar. El contenido vive en **`presentacion/data/unidades.js`** (no en un
+>   `.json`: con `file://` el navegador bloquea `fetch()` de archivos locales). El
+>   esquema de cada tipo de diapositiva está documentado en `presentacion/README.md`.
+> - `propuesta/` — plantilla A4 + `build-pdf.mjs` + PDF de 11 páginas generado. La
+>   carta de presentación y la biografía del autor están como esqueleto, y todo lo
+>   que falta va marcado entre corchetes.
+>
+> Pendiente: volcar las unidades 2-7 en `data/unidades.js` y redactar los textos
+> marcados de la propuesta.
 
 ## Entregables
 

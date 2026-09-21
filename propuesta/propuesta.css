@@ -1,0 +1,294 @@
+/* =======================================================================
+   Propuesta al Ayuntamiento — maquetación A4, estilo institucional sobrio.
+   Sin fondos de color salvo la portada: el resto imprime en blanco.
+   ======================================================================= */
+
+:root{
+  --primario:#4B2FD4;
+  --primario-claro:#6C4CF1;
+  --tinta:#211A3D;
+  --tinta-suave:#655D8A;
+  --linea:#D9D2F2;
+  --marcador:#7A5A00;
+  --marcador-fondo:#FFF3D1;
+  --marcador-borde:#E8C35A;
+}
+
+@page{
+  size:A4;
+  margin:20mm 18mm 18mm;
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+
+html{ font-size:10.5pt; }
+
+body{
+  margin:0;
+  font-family:"Georgia","Times New Roman",serif;
+  color:var(--tinta);
+  line-height:1.55;
+  background:#fff;
+  -webkit-print-color-adjust:exact;
+  print-color-adjust:exact;
+}
+
+h1,h2,h3,.seccion__numero,.unidad__num,.portada__marca,.portada__etiqueta,
+.tabla th,.firma__nombre,.autor__rol{
+  font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+/* ---- Una sección = una hoja ---- */
+.hoja{ break-after:page; page-break-after:always; }
+.hoja:last-child{ break-after:auto; page-break-after:auto; }
+
+/* ---- Marcadores de contenido pendiente ---- */
+.marcador{
+  background:var(--marcador-fondo);
+  color:var(--marcador);
+  border:1px solid var(--marcador-borde);
+  border-radius:3px;
+  padding:0 .25em;
+  font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size:.88em;
+  font-style:normal;
+  white-space:normal;
+}
+.pendiente-redaccion{
+  font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size:.8em; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--marcador);
+  border:1px dashed var(--marcador-borde);
+  border-radius:4px;
+  padding:.4em .8em;
+  display:inline-block;
+  margin:0 0 1em;
+}
+
+/* ===================== PORTADA ===================== */
+
+.portada{
+  height:258mm;                     /* A4 menos los márgenes verticales */
+  display:flex; flex-direction:column;
+  padding:12mm 12mm 11mm;
+  color:#fff;
+  background:
+    radial-gradient(60% 60% at 85% 10%, rgba(255,201,60,.30), transparent 65%),
+    linear-gradient(160deg, #4B2FD4 0%, #6C4CF1 55%, #8B6BFF 100%);
+  border-radius:2mm;
+}
+.portada .marcador{
+  background:rgba(255,255,255,.90);
+  border-color:rgba(255,255,255,.65);
+  color:#5B4200;
+}
+.portada__marca{
+  font-size:.82rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase;
+  color:rgba(255,255,255,.88);
+  border-bottom:1px solid rgba(255,255,255,.35);
+  padding-bottom:4mm;
+}
+.portada__titulo{
+  margin:26mm 0 0;
+  font-size:3.3rem; font-weight:800; line-height:1.04; letter-spacing:-.02em;
+}
+.portada__subtitulo{
+  font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-weight:400;
+  margin:6mm 0 0; font-size:1.28rem; line-height:1.45;
+  color:rgba(255,255,255,.93);
+}
+.portada__datos{
+  margin:5mm 0 0;
+  font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size:.95rem; font-weight:600; letter-spacing:.06em;
+  color:rgba(255,255,255,.85);
+}
+.portada__lema{
+  margin:20mm 0 0; padding-left:5mm;
+  border-left:2px solid rgba(255,255,255,.45);
+  font-size:1.12rem; font-style:italic; line-height:1.55;
+  color:rgba(255,255,255,.92);
+  max-width:135mm;
+}
+.portada__destinatario{
+  margin-top:auto;
+  border-top:1px solid rgba(255,255,255,.35);
+  padding-top:8mm;
+}
+.portada__etiqueta{
+  margin:0; font-size:.78rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase;
+  color:rgba(255,255,255,.75);
+}
+.portada__nombre{ margin:2mm 0 0; font-size:1.15rem; line-height:1.4; font-weight:700; }
+.portada__persona{ margin:2mm 0 0; font-size:1.02rem; }
+.portada__pie{
+  margin-top:8mm; padding-top:5mm;
+  border-top:1px solid rgba(255,255,255,.35);
+  display:flex; justify-content:space-between; align-items:flex-end; gap:8mm;
+  font-size:.95rem;
+}
+.portada__pie p{ margin:0; }
+.portada__fecha{ text-align:right; }
+
+/* ===================== SECCIONES ===================== */
+
+.seccion__cabecera{
+  border-bottom:2px solid var(--primario);
+  padding-bottom:3mm;
+  margin-bottom:7mm;
+}
+.seccion__numero{
+  margin:0; font-size:.8rem; font-weight:700; letter-spacing:.24em;
+  color:var(--primario-claro);
+}
+.seccion__titulo{
+  margin:1mm 0 0; font-size:1.9rem; font-weight:700; letter-spacing:-.01em;
+  color:var(--tinta);
+}
+
+.entradilla{
+  margin:0 0 6mm;
+  font-size:1.06rem; line-height:1.6; color:var(--tinta-suave);
+  border-left:3px solid var(--linea);
+  padding-left:4mm;
+}
+
+p{ margin:0 0 3.5mm; }
+
+.bloque{ margin:0 0 6mm; break-inside:avoid; page-break-inside:avoid; }
+.bloque h3{
+  margin:0 0 2.5mm;
+  font-size:1.02rem; font-weight:700; letter-spacing:.02em;
+  color:var(--primario);
+  border-bottom:1px solid var(--linea);
+  padding-bottom:1.5mm;
+}
+.bloque ul{ margin:0; padding-left:5mm; }
+.bloque li{ margin:0 0 2mm; }
+
+.rejilla-2{
+  display:grid; grid-template-columns:1fr 1fr; gap:6mm 8mm;
+}
+.bloque--ancho{ margin-top:2mm; }
+
+/* ---- Carta ---- */
+.carta__destinatario{
+  margin:0 0 6mm; font-size:1rem; line-height:1.5;
+  border-bottom:1px solid var(--linea); padding-bottom:4mm;
+}
+.carta p{ text-align:justify; }
+
+.firma{ margin-top:8mm; }
+.firma p{ margin:0 0 1mm; }
+.firma__nombre{
+  font-size:1.1rem; font-weight:700; margin-top:5mm!important;
+}
+.firma__meta{ font-size:.9rem; color:var(--tinta-suave); }
+
+/* ---- Fichas de unidad ---- */
+.unidad{
+  break-inside:avoid; page-break-inside:avoid;
+  border:1px solid var(--linea);
+  border-left:3px solid var(--primario-claro);
+  border-radius:1.5mm;
+  padding:4mm 5mm;
+  margin:0 0 4mm;
+}
+.unidad__cabecera{ margin-bottom:2.5mm; }
+.unidad__num{
+  display:block;
+  font-size:.74rem; font-weight:700; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--primario-claro);
+}
+.unidad__cabecera h3{
+  margin:.8mm 0 0; font-size:1.12rem; font-weight:700; line-height:1.25;
+}
+.unidad dl{ margin:0; display:grid; grid-template-columns:26mm 1fr; gap:1.2mm 4mm; }
+.unidad dt{
+  font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size:.76rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+  color:var(--tinta-suave);
+  padding-top:.6mm;
+}
+.unidad dd{ margin:0; font-size:.97rem; line-height:1.45; }
+
+/* ---- Tablas ---- */
+.tabla{
+  width:100%; border-collapse:collapse;
+  margin:0 0 6mm;
+  font-size:.95rem;
+  break-inside:avoid; page-break-inside:avoid;
+}
+.tabla th,.tabla td{
+  text-align:left; vertical-align:top;
+  padding:2.4mm 2.5mm;
+  border-bottom:1px solid var(--linea);
+}
+.tabla thead th{
+  font-size:.76rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--primario);
+  border-bottom:2px solid var(--primario);
+}
+.tabla .num{ text-align:right; white-space:nowrap; }
+.tabla tfoot th{
+  text-align:right;
+  font-size:.86rem; font-weight:700; letter-spacing:.04em;
+  border-bottom:1px solid var(--linea);
+}
+.tabla tfoot .total th,
+.tabla tfoot .total td{
+  border-top:2px solid var(--primario);
+  border-bottom:none;
+  font-size:1.05rem;
+  color:var(--primario);
+  padding-top:3mm;
+}
+.tabla--importes td:first-child{ width:48%; }
+
+/* ---- Ficha de datos ---- */
+.ficha{ margin:0; display:grid; grid-template-columns:auto 1fr; gap:2mm 5mm; }
+.ficha dt{
+  font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size:.78rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+  color:var(--tinta-suave); padding-top:.6mm;
+}
+.ficha dd{ margin:0; font-size:.98rem; }
+
+/* ---- Autor ---- */
+.autor__nombre{ margin:0; font-size:1.6rem; font-weight:700; }
+.autor__rol{
+  margin:1mm 0 6mm; font-size:.95rem; color:var(--tinta-suave);
+  border-bottom:1px solid var(--linea); padding-bottom:3mm;
+}
+
+/* ---- Cierre y firma ---- */
+.cierre-firma{
+  margin-top:8mm; border-top:1px solid var(--linea); padding-top:6mm;
+  break-inside:avoid; page-break-inside:avoid;
+}
+.firma--final{ margin-top:12mm; }
+.firma__lugar{ font-size:.95rem; color:var(--tinta-suave); margin-bottom:12mm!important; }
+.firma__linea{
+  width:70mm; border-bottom:1px solid var(--tinta);
+  margin-bottom:2.5mm;
+}
+
+/* ===================== VISTA EN PANTALLA ===================== */
+/* Solo para revisar el documento en el navegador antes de generar el PDF. */
+
+@media screen{
+  body{ background:#E9E6F2; padding:10mm 0; }
+  .hoja{
+    width:210mm; min-height:297mm;
+    margin:0 auto 8mm;
+    padding:20mm 18mm 18mm;
+    background:#fff;
+    box-shadow:0 4px 18px rgba(33,26,61,.18);
+  }
+  .portada{ height:258mm; }
+}
+
+@media print{
+  .hoja{ padding:0; }
+}

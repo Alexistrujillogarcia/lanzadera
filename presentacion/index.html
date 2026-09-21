@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#6C4CF1">
+<meta name="description" content="Nadie nace sabiendo cuidar: presentación interactiva para el aula sobre tenencia responsable y bienestar animal.">
+<title>Nadie nace sabiendo cuidar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="icon" href="img/huella.png" type="image/png">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<a class="salta" href="#contenido">Saltar al contenido</a>
+
+<main id="contenido">
+
+  <!-- ===================== PANTALLA: MENÚ ===================== -->
+  <section id="pantalla-menu" class="pantalla pantalla--menu" aria-labelledby="menu-titulo">
+    <header class="menu__cabecera">
+      <p class="distintivo" id="menu-distintivo"></p>
+      <h1 class="menu__titulo" id="menu-titulo">Nadie nace sabiendo cuidar</h1>
+      <p class="menu__subtitulo" id="menu-subtitulo"></p>
+      <p class="menu__autor" id="menu-autor"></p>
+    </header>
+
+    <h2 class="menu__epigrafe">Elige una unidad</h2>
+    <ul class="menu__lista" id="menu-lista"></ul>
+
+    <footer class="menu__pie">
+      <button type="button" class="boton boton--fantasma" data-accion="ayuda">Atajos de teclado</button>
+      <button type="button" class="boton boton--fantasma" data-accion="pantalla-completa">Pantalla completa</button>
+      <button type="button" class="boton boton--fantasma" data-accion="borrar-progreso">Borrar progreso guardado</button>
+    </footer>
+  </section>
+
+  <!-- ===================== PANTALLA: UNIDAD ===================== -->
+  <section id="pantalla-unidad" class="pantalla pantalla--unidad" hidden aria-labelledby="unidad-rotulo">
+    <h2 class="oculto-visual" id="unidad-rotulo">Diapositivas de la unidad</h2>
+
+    <div class="progreso" role="progressbar" id="progreso" aria-label="Progreso de la unidad" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+      <div class="progreso__relleno" id="progreso-relleno"></div>
+    </div>
+
+    <button type="button" class="zona zona--anterior" data-accion="anterior" aria-label="Diapositiva anterior" tabindex="-1"></button>
+    <button type="button" class="zona zona--siguiente" data-accion="siguiente" aria-label="Diapositiva siguiente" tabindex="-1"></button>
+
+    <div class="lienzo" id="lienzo"></div>
+
+    <p class="aviso" id="aviso" role="status"></p>
+
+    <nav class="barra" aria-label="Controles de la presentación">
+      <button type="button" class="boton boton--barra" data-accion="menu" aria-label="Volver al menú de unidades">
+        <span aria-hidden="true">‹</span> Menú
+      </button>
+
+      <div class="barra__centro">
+        <button type="button" class="boton boton--redondo" data-accion="anterior" aria-label="Diapositiva anterior"><span aria-hidden="true">‹</span></button>
+        <span class="contador" id="contador" aria-live="polite">1 / 1</span>
+        <button type="button" class="boton boton--redondo" data-accion="siguiente" aria-label="Diapositiva siguiente"><span aria-hidden="true">›</span></button>
+      </div>
+
+      <div class="barra__derecha">
+        <button type="button" class="boton boton--barra" data-accion="ayuda" aria-label="Ver atajos de teclado">?</button>
+        <button type="button" class="boton boton--barra" data-accion="pantalla-completa" aria-label="Pantalla completa">Pantalla completa</button>
+      </div>
+    </nav>
+  </section>
+
+</main>
+
+<!-- ===================== MODAL: ATAJOS ===================== -->
+<div class="modal" id="modal-ayuda" hidden role="dialog" aria-modal="true" aria-labelledby="ayuda-titulo">
+  <div class="modal__caja">
+    <h2 class="modal__titulo" id="ayuda-titulo">Atajos de teclado</h2>
+    <dl class="atajos">
+      <div class="atajo"><dt><kbd>→</kbd> <kbd>↓</kbd> <kbd>Espacio</kbd> <kbd>Intro</kbd></dt><dd>Avanzar</dd></div>
+      <div class="atajo"><dt><kbd>←</kbd> <kbd>↑</kbd> <kbd>Retroceso</kbd></dt><dd>Retroceder</dd></div>
+      <div class="atajo"><dt><kbd>Inicio</kbd> / <kbd>Fin</kbd></dt><dd>Primera / última diapositiva</dd></div>
+      <div class="atajo"><dt><kbd>F</kbd></dt><dd>Pantalla completa</dd></div>
+      <div class="atajo"><dt><kbd>Esc</kbd></dt><dd>Volver al menú de unidades</dd></div>
+      <div class="atajo"><dt><kbd>?</kbd></dt><dd>Mostrar u ocultar esta ayuda</dd></div>
+      <div class="atajo"><dt><kbd>1</kbd> … <kbd>9</kbd></dt><dd>En el menú: abrir esa unidad</dd></div>
+      <div class="atajo"><dt>Deslizar</dt><dd>En táctil: deslizar a izquierda o derecha</dd></div>
+    </dl>
+    <p class="modal__nota">En las preguntas no se puede avanzar con el ratón hasta responder; con las teclas de avance sí se puede saltar.</p>
+    <button type="button" class="boton boton--solido" data-accion="cerrar-ayuda">Cerrar</button>
+  </div>
+</div>
+
+<noscript>
+  <p style="padding:2rem;font-size:1.2rem">Esta presentación necesita JavaScript activado en el navegador.</p>
+</noscript>
+
+<script src="data/unidades.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
