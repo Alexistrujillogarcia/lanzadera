@@ -21,7 +21,7 @@
 
 *,*::before,*::after{ box-sizing:border-box; }
 
-html{ font-size:10.5pt; }
+html{ font-size:10pt; }
 
 body{
   margin:0;
@@ -54,16 +54,6 @@ h1,h2,h3,.seccion__numero,.unidad__num,.portada__marca,.portada__etiqueta,
   font-style:normal;
   white-space:normal;
 }
-.pendiente-redaccion{
-  font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
-  font-size:.8em; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
-  color:var(--marcador);
-  border:1px dashed var(--marcador-borde);
-  border-radius:4px;
-  padding:.4em .8em;
-  display:inline-block;
-  margin:0 0 1em;
-}
 
 /* ===================== PORTADA ===================== */
 
@@ -89,7 +79,7 @@ h1,h2,h3,.seccion__numero,.unidad__num,.portada__marca,.portada__etiqueta,
   padding-bottom:4mm;
 }
 .portada__titulo{
-  margin:26mm 0 0;
+  margin:32mm 0 0;
   font-size:3.3rem; font-weight:800; line-height:1.04; letter-spacing:-.02em;
 }
 .portada__subtitulo{
@@ -105,7 +95,7 @@ h1,h2,h3,.seccion__numero,.unidad__num,.portada__marca,.portada__etiqueta,
   color:rgba(255,255,255,.85);
 }
 .portada__lema{
-  margin:20mm 0 0; padding-left:5mm;
+  margin:30mm 0 0; padding-left:5mm;
   border-left:2px solid rgba(255,255,255,.45);
   font-size:1.12rem; font-style:italic; line-height:1.55;
   color:rgba(255,255,255,.92);
@@ -136,7 +126,7 @@ h1,h2,h3,.seccion__numero,.unidad__num,.portada__marca,.portada__etiqueta,
 .seccion__cabecera{
   border-bottom:2px solid var(--primario);
   padding-bottom:3mm;
-  margin-bottom:7mm;
+  margin-bottom:6mm;
 }
 .seccion__numero{
   margin:0; font-size:.8rem; font-weight:700; letter-spacing:.24em;
@@ -148,15 +138,17 @@ h1,h2,h3,.seccion__numero,.unidad__num,.portada__marca,.portada__etiqueta,
 }
 
 .entradilla{
-  margin:0 0 6mm;
+  margin:0 0 5mm;
   font-size:1.06rem; line-height:1.6; color:var(--tinta-suave);
   border-left:3px solid var(--linea);
   padding-left:4mm;
 }
 
-p{ margin:0 0 3.5mm; }
+p{ margin:0 0 3.5mm; orphans:3; widows:3; }
+li{ orphans:2; widows:2; }
+h2,h3{ break-after:avoid; page-break-after:avoid; }
 
-.bloque{ margin:0 0 6mm; break-inside:avoid; page-break-inside:avoid; }
+.bloque{ margin:0 0 5mm; break-inside:avoid; page-break-inside:avoid; }
 .bloque h3{
   margin:0 0 2.5mm;
   font-size:1.02rem; font-weight:700; letter-spacing:.02em;
@@ -167,10 +159,11 @@ p{ margin:0 0 3.5mm; }
 .bloque ul{ margin:0; padding-left:5mm; }
 .bloque li{ margin:0 0 2mm; }
 
+/* Las rejillas se paginan por filas; van en contenedores separados. */
 .rejilla-2{
-  display:grid; grid-template-columns:1fr 1fr; gap:6mm 8mm;
+  display:grid; grid-template-columns:1fr 1fr; gap:5mm 8mm;
 }
-.bloque--ancho{ margin-top:2mm; }
+.bloque--ancho{ grid-column:1 / -1; margin-top:0; }
 
 /* ---- Carta ---- */
 .carta__destinatario{
@@ -179,7 +172,7 @@ p{ margin:0 0 3.5mm; }
 }
 .carta p{ text-align:justify; }
 
-.firma{ margin-top:8mm; }
+.firma{ margin-top:6mm; }
 .firma p{ margin:0 0 1mm; }
 .firma__nombre{
   font-size:1.1rem; font-weight:700; margin-top:5mm!important;
@@ -192,26 +185,30 @@ p{ margin:0 0 3.5mm; }
   border:1px solid var(--linea);
   border-left:3px solid var(--primario-claro);
   border-radius:1.5mm;
-  padding:4mm 5mm;
-  margin:0 0 4mm;
+  padding:3.4mm 4.5mm;
+  margin:0 0 3mm;
 }
-.unidad__cabecera{ margin-bottom:2.5mm; }
-.unidad__num{
-  display:block;
-  font-size:.74rem; font-weight:700; letter-spacing:.18em; text-transform:uppercase;
+.unidad__cabecera{ margin-bottom:2mm; }
+.unidad__meta{
+  margin:0; display:flex; justify-content:space-between; align-items:baseline; gap:4mm;
+}
+.unidad__num,.unidad__duracion{
+  font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size:.72rem; font-weight:700; letter-spacing:.16em; text-transform:uppercase;
   color:var(--primario-claro);
 }
+.unidad__duracion{ letter-spacing:.06em; color:var(--tinta-suave); white-space:nowrap; }
 .unidad__cabecera h3{
-  margin:.8mm 0 0; font-size:1.12rem; font-weight:700; line-height:1.25;
+  margin:.6mm 0 0; font-size:1.08rem; font-weight:700; line-height:1.22;
 }
-.unidad dl{ margin:0; display:grid; grid-template-columns:26mm 1fr; gap:1.2mm 4mm; }
+.unidad dl{ margin:0; display:grid; grid-template-columns:23mm 1fr; gap:1mm 3.5mm; }
 .unidad dt{
   font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
-  font-size:.76rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+  font-size:.72rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase;
   color:var(--tinta-suave);
-  padding-top:.6mm;
+  padding-top:.7mm;
 }
-.unidad dd{ margin:0; font-size:.97rem; line-height:1.45; }
+.unidad dd{ margin:0; font-size:.94rem; line-height:1.4; text-align:justify; }
 
 /* ---- Tablas ---- */
 .tabla{
@@ -244,7 +241,7 @@ p{ margin:0 0 3.5mm; }
   color:var(--primario);
   padding-top:3mm;
 }
-.tabla--importes td:first-child{ width:48%; }
+.tabla--importes td:first-child{ width:53%; }
 
 /* ---- Ficha de datos ---- */
 .ficha{ margin:0; display:grid; grid-template-columns:auto 1fr; gap:2mm 5mm; }
@@ -256,11 +253,15 @@ p{ margin:0 0 3.5mm; }
 .ficha dd{ margin:0; font-size:.98rem; }
 
 /* ---- Autor ---- */
-.autor__nombre{ margin:0; font-size:1.6rem; font-weight:700; }
+.autor{ margin:0 0 7mm; break-inside:avoid; page-break-inside:avoid; }
+.autor__nombre{ margin:0; font-size:1.35rem; font-weight:700; }
+.autor__nombre .marcador{ font-size:.66em; vertical-align:.08em; }
 .autor__rol{
-  margin:1mm 0 6mm; font-size:.95rem; color:var(--tinta-suave);
-  border-bottom:1px solid var(--linea); padding-bottom:3mm;
+  margin:1mm 0 4mm; font-size:.93rem; color:var(--tinta-suave);
+  border-bottom:1px solid var(--linea); padding-bottom:2.5mm;
 }
+.autor > p{ text-align:justify; }
+.autor .ficha{ margin-top:3mm; }
 
 /* ---- Cierre y firma ---- */
 .cierre-firma{
@@ -272,6 +273,36 @@ p{ margin:0 0 3.5mm; }
 .firma__linea{
   width:70mm; border-bottom:1px solid var(--tinta);
   margin-bottom:2.5mm;
+}
+
+/* ---- Lista a dos columnas (dinámicas) ---- */
+.lista-2{
+  column-count:2; column-gap:8mm;
+}
+.lista-2 li{ break-inside:avoid; page-break-inside:avoid; }
+
+/* ---- Nota aclaratoria (fórmula del presupuesto) ---- */
+.nota{
+  border:1px solid var(--linea);
+  border-left:3px solid var(--primario-claro);
+  border-radius:1.5mm;
+  padding:4mm 5mm 2mm;
+}
+.nota h3{ border-bottom:none; padding-bottom:0; margin-bottom:1.5mm; }
+.nota ul{ margin-bottom:1mm; }
+.formula{
+  font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size:.92rem; line-height:1.7;
+  padding-left:4mm;
+  border-left:2px solid var(--linea);
+}
+.formula__total{ color:var(--primario); font-weight:700; }
+
+/* ---- Apostilla dentro de una tabla ---- */
+.tabla__nota{
+  display:block;
+  font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size:.76rem; color:var(--tinta-suave); letter-spacing:.04em;
 }
 
 /* ===================== VISTA EN PANTALLA ===================== */
@@ -291,4 +322,5 @@ p{ margin:0 0 3.5mm; }
 
 @media print{
   .hoja{ padding:0; }
+  .portada{ padding:14mm 13mm 12mm; }   /* la portada conserva su margen interior */
 }

@@ -12,21 +12,27 @@ propuesta/
 └── README.md                    este archivo
 ```
 
-## Estado: esqueleto pendiente de rellenar
+## Estado: redactado, a falta de los datos que solo conoce el autor
 
-El documento está completo en estructura pero **no en contenido**. Todo lo que
-falta aparece resaltado en amarillo entre corchetes, tanto en el HTML como en
-el PDF:
+El texto del documento está **cerrado y definitivo**. Lo único que queda por
+completar son los datos que no podían saberse al redactarlo, resaltados en
+amarillo entre corchetes tanto en el HTML como en el PDF:
 
-- `[Nombre del alcalde/sa]`, `[Municipio/localidad]`, `[fecha]`, `[curso escolar]`
-- `[importe]`, `[tipo]` (% de IGIC), `[nº]`, `[forma de pago y plazos]`
-- `[teléfono]`, `[correo electrónico]`, `[dirección postal]`, `[NIF]`, `[dirección web]`
-- `[materiales específicos]` en las fichas de las unidades 2 a 7
-- Los datos biográficos completos de «Sobre el autor»
-
-Además, dos bloques llevan la etiqueta **PENDIENTE DE REDACCIÓN**: la carta de
-presentación (sección 01) y la biografía del autor (sección 08). Ahí solo está
-el esqueleto, párrafo a párrafo, con la indicación de qué debe contar cada uno.
+- **Destinatario y fechas:** `[Nombre del alcalde/sa]`, `[fecha]`, `[fechas]`,
+  `[curso escolar]`, `[nº]` (centros y grupos).
+- **Presupuesto:** `[importe]` en cada concepto y en base imponible, IGIC y total.
+  El tipo de IGIC ya está fijado en el 7 %.
+- **Contacto:** `[teléfono]`, `[correo electrónico]`, `[dirección postal]`, `[NIF]`,
+  `[adjuntar]`.
+- **Coautor:** `[nombre completo y cargo de Víctor]`, `[nombre completo de Víctor]`,
+  `[cargo]`, `[unidad, destino y funciones]`, `[años de servicio…]`,
+  `[confirmar si participa presencialmente…]`.
+- **Biografía de Alexis:** `[formación y experiencia profesional relevante]`,
+  `[experiencia en protectoras, voluntariado, colaboraciones]`,
+  `[charlas, talleres o programas impartidos previamente]`,
+  `[motivación personal en dos o tres líneas]`, `[alta como autónomo, seguro…]`.
+- **Opcional:** `[cifra municipal, si se dispone]` — gasto anual del municipio en
+  recogida y acogida, para reforzar el argumento económico.
 
 Para localizarlos todos:
 
@@ -41,16 +47,17 @@ grep -o '\[[^]]*\]' propuesta/propuesta.html | sort -u
 | 1 | Portada |
 | 2 | 01 · Carta de presentación |
 | 3 | 02 · La actividad en una página |
-| 4-5 | 03 · Las unidades (7 fichas) |
+| 4-5 | 03 · Las siete unidades (7 fichas) |
 | 6 | 04 · Beneficios para el municipio y los centros |
 | 7 | 05 · Metodología y recursos |
 | 8 | 06 · Calendario propuesto |
 | 9 | 07 · Presupuesto |
-| 10 | 08 · Sobre el autor |
+| 10 | 08 · Sobre los autores |
 | 11 | 09 · Contacto y firma |
 
 Cada sección arranca en página nueva. Las fichas de unidad y las tablas no se
-parten entre páginas.
+parten entre páginas. Las duraciones de las unidades (45/45/40/45/50/45/30 min)
+suman las cinco horas de la jornada y van marcadas como orientativas.
 
 ## Editar
 
@@ -58,9 +65,9 @@ parten entre páginas.
 paginado (una hoja blanca por sección, con sombra, sobre fondo gris). Para
 revisar exactamente cómo va a imprimirse, `Ctrl+P` en el navegador.
 
-Las duraciones de las unidades («45 min (orientativo)») son una distribución
-estimada del total de cinco horas: convendrá ajustarlas a la realidad de las
-sesiones antes de enviar la propuesta.
+Las duraciones de las unidades son una distribución estimada del total de cinco
+horas: convendrá ajustarlas a la realidad de las sesiones antes de enviar la
+propuesta.
 
 ## Generar el PDF
 
