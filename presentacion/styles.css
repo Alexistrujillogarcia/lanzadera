@@ -477,12 +477,15 @@ img{ max-width:100%; height:auto; }
 .flip__interior{
   position:relative; width:100%; height:100%;
   min-height:inherit;
+  /* Las dos caras se apilan en la misma celda de rejilla: así la tarjeta mide
+     siempre lo que mide la cara más alta y el dorso nunca se corta. */
+  display:grid; grid-template-columns:100%;
   transform-style:preserve-3d;
   transition:transform .55s cubic-bezier(.3,.8,.3,1);
 }
 .flip.volteada .flip__interior{ transform:rotateY(180deg); }
 .flip__cara{
-  position:absolute; inset:0;
+  grid-area:1 / 1; min-width:0;
   -webkit-backface-visibility:hidden; backface-visibility:hidden;
   display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.4em;
   text-align:center;
@@ -654,8 +657,41 @@ kbd{
   .zona{ width:26px; }
   .barra__derecha .boton--barra[data-accion="pantalla-completa"]{ display:none; }
   .atajo dt{ min-width:100%; }
-  .flip{ min-height:clamp(210px,30vh,300px); }
   .barra{ padding-bottom:max(8px, env(safe-area-inset-bottom)); }
+
+  /* Densidad para móvil vertical: en una pantalla de 390x844 el alto útil es
+     ~780 px, así que se recortan huecos, no el tamaño del texto, para que las
+     diapositivas con 4 tarjetas, 4-5 puntos o temporizador quepan sin scroll. */
+  .d__rotulo{ margin-bottom:.35em; }
+  .d__titulo{ margin-bottom:.35em; }
+  .d__afirmacion{ font-size:calc(var(--fs-cuerpo) * 1.02); padding:12px; }
+  .sabias__cifra{ font-size:calc(var(--fs-cifra) * .78); overflow-wrap:anywhere; }
+  .encuesta{ grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+  .encuesta__opcion{ padding:10px; }
+  .encuesta__cifra{ font-size:calc(var(--fs-cifra) * .34); }
+  .flip{ min-height:clamp(132px,16vh,200px); }
+  .tarjetas{ gap:10px; }
+  .flip__cara{ padding:10px; gap:.3em; }
+  .tarjetas:not(.tarjetas--una) .flip__texto{
+    font-size:calc(var(--fs-cuerpo) * .88); line-height:1.25;
+  }
+  .lista{ gap:8px; }
+  .lista__item{ padding:10px; gap:.6em; line-height:1.32; }
+  .lista__icono{ width:34px; height:34px; border-radius:12px; }
+  .cierre__ideas{ gap:7px; }
+  .cierre__idea{ padding:8px; line-height:1.32; }
+  .cierre__siguiente{ padding:10px; margin-top:10px; line-height:1.32; }
+  .reto{ gap:12px; }
+  .reto__paso{ padding:8px; font-size:calc(var(--fs-cuerpo) * .85); line-height:1.32; }
+  .reto__premio{ padding:.5em .8em; line-height:1.32; }
+  .d--reto .texto__parrafo{ font-size:calc(var(--fs-cuerpo) * .92); line-height:1.32; }
+  .reto__pasos{ gap:6px; }
+  /* El temporizador pasa a una sola fila para no comerse media pantalla. */
+  .crono{
+    display:flex; flex-wrap:wrap; align-items:center; justify-content:center;
+    gap:6px 14px; padding:8px 12px;
+  }
+  .crono__tiempo{ margin:0; font-size:calc(var(--fs-cifra) * .36); }
 }
 
 /* Pantallas muy bajas (proyectores 4:3, ventanas pequeñas) */
