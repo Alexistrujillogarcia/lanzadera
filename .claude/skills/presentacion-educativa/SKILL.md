@@ -61,6 +61,9 @@ pida otro idioma.
 `bash scripts/nuevo_proyecto.sh <carpeta-destino>` copia `assets/presentacion`
 y `assets/propuesta` al destino sin pisar nada que ya exista. Después:
 
+- Pon el título real en el `<title>` de `presentacion/index.html` (el motor lo
+  sobrescribe al cargar, pero el artefacto publicado y los marcadores del
+  navegador usan el estático).
 - En `presentacion/data/unidades.js` rellena `config` (título, subtítulo, autor,
   ámbito, `colorPrimario`, `colorAcento` y resto de paleta del original) y la
   lista de unidades. El esquema completo de los 11 tipos, con todos los campos
