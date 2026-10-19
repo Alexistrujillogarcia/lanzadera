@@ -17,7 +17,7 @@ Logística y apdo. 2.2.8.2 Ganadería). Texto íntegro en `unidades/texto/*.md`.
   una) que se pueden dar seguidas o por separado.
 - Ámbito: Canarias (PLATECA) y, como caso, Guía de Isora (Tenerife): núcleos de Chirche y
   Aripe, riesgo volcánico, semáforo naranja del PEVOLCA.
-- Autor: Víctor Manuel Abolafia Castro (Seprona, Guardia Civil). Alexis Trujillo solo produce la presentación; no figura como autor.
+- Autor: Víctor Manuel Abolafia Castro, Graduado en Criminología y Ciencias de la Seguridad y Máster en Gestión de Seguridad, Crisis y Emergencias. Proyecto divulgativo a título particular: no se menciona su cargo ni su cuerpo. Alexis Trujillo produce la presentación y no figura como autor.
 - Paleta del original: verde salvia #88A596 (fondo de iconos), verde oscuro #1F3A2E (texto),
   verde #2F6B4F (primario), dorado #C99A2E (acento), rojo #A8402B.
 

@@ -30,7 +30,7 @@ window.UNIDADES = {
   config: {
     titulo: "Formación sobre Logística y acogida de animales",
     subtitulo: "Píldora formativa · 4 unidades · Protocolo de animales en emergencias (Decreto 195/2022)",
-    autor: "Víctor Manuel Abolafia Castro · Seprona, Guardia Civil",
+    autor: "Víctor Manuel Abolafia Castro · Graduado en Criminología y Ciencias de la Seguridad · Máster en Gestión de Seguridad, Crisis y Emergencias",
     municipio: "Guía de Isora (Tenerife) · Canarias",
     distintivo: "Para ayuntamientos y universidad",
     descripcion: "Píldora formativa sobre qué medios y recursos debe tener catalogados un ayuntamiento para evacuar y acoger animales en emergencias, según el Decreto 195/2022.",
