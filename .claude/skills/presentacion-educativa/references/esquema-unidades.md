@@ -190,7 +190,7 @@ todos. Máximo recomendable: 5 puntos (4 si llevan texto largo).
 
 ### 4. `imagen` — icono grande + cita
 
-El motor pinta la imagen a tamaño de icono (100-240 px), no a pantalla
+El motor pinta la imagen a tamaño de icono (100-240 px) salvo con `imagenGrande: true`, no a pantalla
 completa: está pensado para la diapositiva «Para reflexionar» con un icono y
 una frase. Para una foto grande habría que cambiar el CSS.
 
@@ -198,6 +198,7 @@ una frase. Para una foto grande habría que cambiar el CSS.
 |---|---|
 | `imagen`, `imagenAlt` | Icono y texto alternativo. |
 | `pie` | Frase destacada bajo la imagen (grande, en color primario). |
+| `imagenGrande` | `true` para diagramas, organigramas o fotos: la imagen ocupa el ancho de la diapositiva hasta el 60 % de la altura, sobre fondo blanco. Sin él, sale a tamaño de icono. |
 
 ```js
 { tipo: "imagen",

@@ -1,6 +1,7 @@
 /* =======================================================================
-   NADIE NACE SABIENDO CUIDAR — motor de la presentación
-   Sin dependencias. El contenido vive en data/unidades.js.
+   Motor de la presentación interactiva por unidades
+   Sin dependencias. Todo el contenido (y el título, colores e icono) vive
+   en data/unidades.js: este archivo no se toca para un programa nuevo.
    ======================================================================= */
 (function () {
   'use strict';
@@ -12,7 +13,14 @@
   var DATOS = window.UNIDADES || { config: {}, unidades: [] };
   var CONFIG = DATOS.config || {};
   var UNIDADES = DATOS.unidades || [];
-  var CLAVE_ALMACEN = 'nnsc.progreso.v1';
+  /* Clave de localStorage propia de cada programa, para que dos
+     presentaciones abiertas desde el mismo origen no mezclen el progreso. */
+  function aSlug(t) {
+    var s = String(t || 'presentacion').toLowerCase();
+    if (s.normalize) { s = s.normalize('NFD').replace(/[\u0300-\u036f]/g, ''); }
+    return s.replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 40) || 'presentacion';
+  }
+  var CLAVE_ALMACEN = (CONFIG.claveAlmacen || aSlug(CONFIG.titulo)) + '.progreso.v1';
 
   var $ = function (sel) { return document.querySelector(sel); };
 
@@ -101,6 +109,17 @@
       document.title = CONFIG.titulo;
     }
     $('#menu-subtitulo').textContent = texto(CONFIG.subtitulo);
+    if (CONFIG.epigrafe) { $('#menu-epigrafe').textContent = CONFIG.epigrafe; }
+
+    /* Metadatos de la pestaña: descripción, color de la barra del navegador e icono */
+    var desc = document.querySelector('meta[name="description"]');
+    if (desc && (CONFIG.descripcion || CONFIG.subtitulo)) {
+      desc.setAttribute('content', texto(CONFIG.descripcion || CONFIG.subtitulo));
+    }
+    var tema = document.querySelector('meta[name="theme-color"]');
+    if (tema && CONFIG.colorPrimario) { tema.setAttribute('content', CONFIG.colorPrimario); }
+    var favicon = document.getElementById('favicon');
+    if (favicon && CONFIG.favicon) { favicon.setAttribute('href', CONFIG.favicon); }
 
     var autor = [];
     if (CONFIG.autor) { autor.push(CONFIG.autor); }
@@ -395,7 +414,8 @@
     imagen: function (d) {
       var c = el('div', 'd d--imagen');
       cabecera(c, d);
-      var fig = el('figure', 'figura');
+      /* imagenGrande: true ⇒ diagrama u organigrama a ancho de diapositiva, no a tamaño de icono */
+      var fig = el('figure', 'figura' + (d.imagenGrande ? ' figura--grande' : ''));
       if (d.imagen) {
         var img = el('img', 'figura__img');
         img.src = d.imagen; img.alt = texto(d.imagenAlt);

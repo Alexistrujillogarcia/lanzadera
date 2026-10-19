@@ -414,7 +414,8 @@
     imagen: function (d) {
       var c = el('div', 'd d--imagen');
       cabecera(c, d);
-      var fig = el('figure', 'figura');
+      /* imagenGrande: true ⇒ diagrama u organigrama a ancho de diapositiva, no a tamaño de icono */
+      var fig = el('figure', 'figura' + (d.imagenGrande ? ' figura--grande' : ''));
       if (d.imagen) {
         var img = el('img', 'figura__img');
         img.src = d.imagen; img.alt = texto(d.imagenAlt);
