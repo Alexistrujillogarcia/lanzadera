@@ -1,0 +1,639 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[Título del programa] — Propuesta a [Institución destinataria]</title>
+<!-- GUÍA: build-pdf.mjs lee estas tres metas. La cabecera sale arriba a la
+     derecha en cada página (salvo en el camino de reserva sin Playwright), el pie
+     a la izquierda junto a «Página N de M», y el archivo es el nombre del PDF. -->
+<meta name="pdf-cabecera" content="Propuesta a [Institución destinataria]">
+<meta name="pdf-pie" content="[Título del programa] · [Nombre del autor o autora]">
+<meta name="pdf-archivo" content="Propuesta.pdf">
+<link rel="stylesheet" href="propuesta.css">
+</head>
+<body>
+
+<!--
+  =============================================================================
+  PLANTILLA DE PROPUESTA INSTITUCIONAL — portada + 9 secciones, una por hoja A4.
+  =============================================================================
+  · Lee references/guia-propuesta.md de la skill antes de redactar.
+  · Todo lo que no sepas con certeza (nombres, importes, fechas, cargos, datos
+    de contacto) se queda como <span class="marcador">[…]</span>: sale resaltado
+    en amarillo en el HTML y en el PDF. NUNCA inventes una cifra ni un nombre.
+  · Los comentarios <!- - GUÍA: … - -> explican qué va en cada bloque. Puedes
+    dejarlos: no se imprimen.
+  · Para localizar los marcadores pendientes:
+        grep -o '\[[^]]*\]' propuesta.html | sort | uniq -c
+  · Genera el PDF con  node build-pdf.mjs  y revisa cada página rasterizada.
+    Objetivo: 10-12 páginas, ninguna con menos de dos tercios de contenido.
+  =============================================================================
+-->
+
+<!-- ==================== PORTADA ==================== -->
+<!-- GUÍA: la portada respira. Título grande (con <br> donde corte bien),
+     subtítulo de dos líneas (tema + ámbito), una línea de datos clave y una
+     cita del propio material como lema. No añadas más bloques: el aire es
+     parte del diseño. -->
+<section class="hoja portada">
+  <div class="portada__marca"><span class="marcador">[Programa educativo para colegios e institutos]</span></div>
+
+  <h1 class="portada__titulo"><span class="marcador">[Título del<br>programa]</span></h1>
+  <p class="portada__subtitulo"><span class="marcador">[Tema del programa]</span><br>en las aulas de <span class="marcador">[municipio o ámbito]</span></p>
+
+  <!-- GUÍA: «N unidades · N horas (formato) · niveles». Solo datos confirmados. -->
+  <p class="portada__datos"><span class="marcador">[N unidades · N horas · niveles educativos]</span></p>
+
+  <!-- GUÍA: la frase más rotunda del material original, literal, entre comillas latinas. -->
+  <blockquote class="portada__lema">
+    «<span class="marcador">[Frase del material original que resuma el programa]</span>»
+  </blockquote>
+
+  <div class="portada__destinatario">
+    <p class="portada__etiqueta">Dirigido a</p>
+    <p class="portada__nombre"><span class="marcador">[Tratamiento y cargo, p. ej. Excmo. Sr. Alcalde-Presidente]</span><br>del <span class="marcador">[Institución destinataria]</span></p>
+    <p class="portada__persona">D./Dña. <span class="marcador">[Nombre del destinatario/a]</span> · <span class="marcador">[Concejalía o área competente]</span></p>
+  </div>
+
+  <div class="portada__pie">
+    <p><strong><span class="marcador">[Nombre del autor o autora]</span></strong>, promotor/a del programa<br>
+       <!-- GUÍA: coautor solo si existe; si no, borra esta línea. -->
+       con <strong><span class="marcador">[nombre completo y cargo del coautor/a]</span></strong></p>
+    <p class="portada__fecha"><span class="marcador">[Lugar]</span><br><span class="marcador">[fecha]</span></p>
+  </div>
+</section>
+
+<!-- ==================== 1. CARTA DE PRESENTACIÓN ==================== -->
+<!-- GUÍA: una página justa, cinco párrafos, tono formal y directo:
+     1) quién escribe, qué es el programa, quién firma la parte técnica o legal,
+        y por qué escribe ahora (una oportunidad barata y medible).
+     2) el DATO POTENTE del material, con su fuente, y la causa real del problema;
+        enlaza con la normativa que el público no conoce.
+     3) qué hace el programa en el aula, en una frase larga con verbos de acción
+        (debate, calcula, dictamina, ensaya, crea) y su formato (unidades, horas).
+     4) por qué se dirige a ESTA institución y no a cada centro: su normativa,
+        sus servicios, sus líneas de trabajo con las que encaja sin duplicar.
+     5) lo que se solicita, en negrita: reunión, aprobación y financiación para
+        el curso [curso escolar], remitiendo al apartado 07. Agradecimiento.
+     Sin grandilocuencia ni adjetivos vacíos. -->
+<section class="hoja">
+  <header class="seccion__cabecera">
+    <p class="seccion__numero">01</p>
+    <h2 class="seccion__titulo">Carta de presentación</h2>
+  </header>
+
+  <div class="carta">
+    <p class="carta__destinatario">
+      <span class="marcador">[Tratamiento]</span> <span class="marcador">[Nombre del destinatario/a]</span><br>
+      <span class="marcador">[Cargo]</span> del <span class="marcador">[Institución destinataria]</span>
+    </p>
+
+    <p>Me dirijo a usted como promotor/a del programa educativo «<span class="marcador">[Título del programa]</span>»,
+    una actividad sobre <span class="marcador">[tema]</span> diseñada para las aulas de
+    <span class="marcador">[niveles educativos]</span>. <span class="marcador">[Quién firma la parte técnica o legal y por qué aporta garantías]</span>.
+    Escribo porque creo que <span class="marcador">[el municipio / la institución]</span> tiene ahora mismo una
+    oportunidad barata y medible de actuar sobre un problema que hoy solo gestiona cuando ya ha ocurrido.</p>
+
+    <!-- GUÍA: el dato potente va AQUÍ, en negrita, con su fuente tal cual la cita el material. -->
+    <p><span class="marcador">[Dato potente del material, con su cifra en negrita y su fuente]</span>.
+    <span class="marcador">[Causa real del problema, según el propio material]</span>.
+    <span class="marcador">[Qué normativa existe y qué parte de ella desconoce el público destinatario: dos o tres ejemplos concretos]</span>.</p>
+
+    <p>«<span class="marcador">[Título del programa]</span>» lleva esa información al único sitio donde todavía llega a
+    todo el mundo a la vez: el aula. Son <strong><span class="marcador">[N unidades, N horas, formato]</span></strong>,
+    en las que el alumnado <span class="marcador">[verbos de acción: debate, calcula, dictamina, ensaya, crea…]</span>
+    y sale de clase con <span class="marcador">[producto o compromiso final]</span>.</p>
+
+    <p>Me dirijo a <span class="marcador">[la institución]</span> y no a cada centro por separado porque
+    <span class="marcador">[es su normativa / sus servicios / su competencia]</span>.
+    <span class="marcador">[Línea, concejalía o programa existente con el que encaja sin duplicar]</span>, y un acuerdo
+    institucional permite llegar de forma ordenada a todos los centros, con un calendario único.</p>
+
+    <p>Por todo ello, le solicito respetuosamente tres cosas: una <strong>reunión</strong> con
+    usted o con la persona responsable de <span class="marcador">[área o concejalías]</span> para
+    exponer el programa en detalle; la <strong>aprobación</strong> de la actividad como programa
+    <span class="marcador">[municipal / insular / autonómico]</span> dirigido a los centros educativos; y su
+    <strong>financiación</strong> para el curso escolar <span class="marcador">[curso escolar]</span>,
+    conforme al presupuesto que se detalla en el apartado 07 de este documento. Quedo a su
+    entera disposición y le agradezco de antemano el tiempo dedicado a leer esta propuesta.</p>
+
+    <div class="firma">
+      <p>Atentamente,</p>
+      <p class="firma__nombre"><span class="marcador">[Nombre del autor o autora]</span></p>
+      <p class="firma__meta"><span class="marcador">[teléfono]</span> · <span class="marcador">[correo electrónico]</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 2. LA ACTIVIDAD EN UNA PÁGINA ==================== -->
+<!-- GUÍA: quien solo lea esta página debe entender qué se compra. Entradilla de
+     dos o tres líneas («no es una charla: es…»), y bloques breves: público,
+     formato, dinámicas (una línea cada una, nombre en negrita), evaluación y
+     producto final. Todo sale del material; nada de dinámicas inventadas. -->
+<section class="hoja">
+  <header class="seccion__cabecera">
+    <p class="seccion__numero">02</p>
+    <h2 class="seccion__titulo">La actividad en una página</h2>
+  </header>
+
+  <p class="entradilla">
+    «<span class="marcador">[Título del programa]</span>» no es una charla. Es
+    <span class="marcador">[formato: jornada, sesiones…]</span> en la que el alumnado
+    <span class="marcador">[verbos de acción]</span>: <span class="marcador">[N]</span> unidades encadenadas que van
+    <span class="marcador">[de A a B, de B a C…: el hilo del programa en una frase]</span>.
+  </p>
+
+  <div class="rejilla-2">
+    <div class="bloque">
+      <h3>A quién va dirigida</h3>
+      <ul>
+        <li><span class="marcador">[Niveles y cursos]</span> de los centros de <span class="marcador">[ámbito]</span>.</li>
+        <li><span class="marcador">[Agrupamiento: grupo-clase completo, desdobles…]</span></li>
+        <li><span class="marcador">[Adaptación al nivel del grupo]</span></li>
+      </ul>
+    </div>
+
+    <div class="bloque">
+      <h3>Formato</h3>
+      <ul>
+        <li><strong><span class="marcador">[N horas, presenciales, en una o varias sesiones]</span></strong>, en el aula del propio centro.</li>
+        <li><strong><span class="marcador">[N unidades]</span></strong> <span class="marcador">[cómo se encadenan; pausas]</span>.</li>
+        <li><span class="marcador">[Qué no necesita reorganizar el centro]</span></li>
+        <li>Presentación proyectada e interactiva, que funciona sin conexión a internet.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="bloque bloque--ancho">
+    <!-- GUÍA: una línea por dinámica real del material (de 4 a 8). Nombre en
+         negrita + qué hace el alumnado. Duplica el <li> las veces que haga falta. -->
+    <h3>Metodología activa: <span class="marcador">[N]</span> dinámicas, cero clases magistrales</h3>
+    <ul class="lista-2">
+      <li><strong><span class="marcador">[Nombre de la dinámica]</span>.</strong> <span class="marcador">[Qué hace el alumnado, en una línea]</span>.</li>
+      <li><strong><span class="marcador">[Nombre de la dinámica]</span>.</strong> <span class="marcador">[Qué hace el alumnado, en una línea]</span>.</li>
+      <li><strong><span class="marcador">[Nombre de la dinámica]</span>.</strong> <span class="marcador">[Qué hace el alumnado, en una línea]</span>.</li>
+      <li><strong><span class="marcador">[Nombre de la dinámica]</span>.</strong> <span class="marcador">[Qué hace el alumnado, en una línea]</span>.</li>
+    </ul>
+  </div>
+
+  <div class="rejilla-2">
+    <div class="bloque">
+      <h3>Evaluación y certificado</h3>
+      <ul>
+        <li>Se evalúan <span class="marcador">[qué se evalúa y con qué criterios o rúbrica]</span>.</li>
+        <li><span class="marcador">[Certificado: de asistencia, de aprovechamiento, ninguno]</span></li>
+      </ul>
+    </div>
+
+    <div class="bloque">
+      <h3>Producto final</h3>
+      <ul>
+        <li><span class="marcador">[Qué produce el alumnado: piezas, compromiso, proyecto…]</span></li>
+        <li><span class="marcador">[Cómo puede aprovecharlo el centro y la institución]</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 3. LAS UNIDADES ==================== -->
+<!-- GUÍA: entradilla breve sobre el orden y las duraciones (orientativas si
+     no están confirmadas) y UNA FICHA POR UNIDAD con cuatro campos:
+       · cabecera: «Unidad N» + «NN min · orientativo» + título literal.
+       · Objetivo: una frase.
+       · En el aula: qué ocurre, con las dinámicas en negrita y los minutos que
+         da el material; datos y normas tal cual.
+       · Se lleva: lo que el alumnado sabe o tiene al salir.
+     Caben dos o tres fichas por página; las fichas no se parten (break-inside:
+     avoid). Si una unidad tiene mucho contenido, resume: 90-130 palabras. -->
+<section class="hoja">
+  <header class="seccion__cabecera">
+    <p class="seccion__numero">03</p>
+    <h2 class="seccion__titulo">Las <span class="marcador">[N]</span> unidades</h2>
+  </header>
+
+  <p class="entradilla">
+    Las unidades se imparten <span class="marcador">[seguidas, en este orden / en sesiones separadas]</span>.
+    El reparto de minutos es orientativo sobre el total de <span class="marcador">[N horas]</span> y se ajusta al
+    horario real de cada centro.
+  </p>
+
+  <!-- GUÍA: DUPLICAR ESTE <article> POR CADA UNIDAD (Unidad 1, 2, 3…). -->
+  <article class="unidad">
+    <div class="unidad__cabecera">
+      <p class="unidad__meta"><span class="unidad__num">Unidad 1</span><span class="unidad__duracion"><span class="marcador">[NN]</span> min · orientativo</span></p>
+      <h3><span class="marcador">[Título literal de la unidad]</span></h3>
+    </div>
+    <dl>
+      <dt>Objetivo</dt><dd><span class="marcador">[Qué se pretende, en una frase]</span></dd>
+      <dt>En el aula</dt><dd><span class="marcador">[Qué ocurre: arranque, datos y normas clave, y las dinámicas en negrita con sus minutos]</span></dd>
+      <dt>Se lleva</dt><dd><span class="marcador">[Lo que el alumnado sabe, decide o tiene al salir]</span></dd>
+    </dl>
+  </article>
+
+</section>
+
+<!-- ==================== 4. BENEFICIOS ==================== -->
+<!-- GUÍA: el apartado que convence. Para la institución, cuatro argumentos con
+     la idea en negrita al principio:
+       1) difunde SU propia normativa (y la estatal/autonómica) entre quienes
+          más la van a aplicar;
+       2) actúa sobre la causa real del problema, no sobre sus consecuencias
+          (y lo que eso ahorra), con [cifra local, si se dispone];
+       3) ciudadanía que sabe actuar (protocolo, a quién llamar…);
+       4) da a conocer sus recursos y encaja con líneas existentes sin duplicar.
+     Después: medible y escalable / para los centros / para el alumnado y familias. -->
+<section class="hoja">
+  <header class="seccion__cabecera">
+    <p class="seccion__numero">04</p>
+    <h2 class="seccion__titulo">Beneficios para <span class="marcador">[la institución]</span> y los centros</h2>
+  </header>
+
+  <div class="bloque">
+    <h3>Para <span class="marcador">[la institución destinataria]</span></h3>
+    <ul>
+      <li><strong>Difunde <span class="marcador">[su propia normativa]</span></strong> <span class="marcador">[entre quién y cómo: qué normas concretas se convierten en casos que el alumnado dictamina]</span>.</li>
+      <li><strong>Actúa sobre la causa real <span class="marcador">[del problema]</span>, no sobre sus consecuencias.</strong>
+          <span class="marcador">[Cómo, y qué coste evita a la institución]</span>
+          <span class="marcador">[cifra local, si se dispone]</span></li>
+      <li><strong>Forma ciudadanía que sabe actuar.</strong> <span class="marcador">[Qué sabe hacer el alumnado al salir y qué gana con ello la institución]</span></li>
+      <li><strong>Da a conocer los recursos <span class="marcador">[de la institución]</span></strong> y <strong>encaja con las líneas ya existentes</strong> <span class="marcador">[cuáles]</span>, sin duplicarlas.</li>
+    </ul>
+  </div>
+
+  <div class="rejilla-2">
+    <div class="bloque">
+      <h3>Medible y escalable</h3>
+      <ul>
+        <li><strong>Metodología evaluable:</strong> <span class="marcador">[qué evidencias de aprendizaje genera]</span>. Hay evidencia de lo aprendido, no solo asistencia.</li>
+        <li><strong>Unidad de despliegue clara:</strong> <span class="marcador">[una jornada / N sesiones]</span> por grupo-clase. El coste y el alcance se calculan multiplicando, no estimando.</li>
+        <li><strong>Escalable por centros:</strong> un piloto primero y extensión al resto durante el curso, con memoria final comparable.</li>
+        <li><strong>Material reutilizable:</strong> <span class="marcador">[qué queda a disposición de la institución]</span>.</li>
+      </ul>
+    </div>
+
+    <div class="bloque">
+      <h3>Para los centros educativos</h3>
+      <ul>
+        <li><strong>Encaje curricular</strong> con <span class="marcador">[materias, plan de acción tutorial, proyectos del centro]</span>.</li>
+        <li><strong>Sin carga de preparación</strong> para el profesorado: el programa llega con presentación, materiales y dinámicas listas.</li>
+        <li><strong>Competencias transversales:</strong> <span class="marcador">[argumentación, trabajo en equipo, pensamiento crítico…]</span>.</li>
+        <li><strong><span class="marcador">[Ventaja de formato: una sola jornada, sesiones cortas…]</span></strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="bloque bloque--ancho">
+    <h3>Para el alumnado y sus familias</h3>
+    <ul>
+      <li><span class="marcador">[Qué saben al salir del aula]</span></li>
+      <li><span class="marcador">[Qué saben hacer]</span></li>
+      <li><span class="marcador">[Cómo llega el mensaje a casa]</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ==================== 5. METODOLOGÍA Y RECURSOS ==================== -->
+<!-- GUÍA: cómo se trabaja (4-5 principios con la idea en negrita: se pregunta
+     antes de explicar, datos y ley con fuentes, del caso a la regla, participa
+     todo el mundo, cierre en acción), qué aporta el programa (presentación y
+     materiales concretos por unidad), qué necesita del centro (aula, proyector,
+     horas, grupo) y qué ocurre después de la sesión. -->
+<section class="hoja">
+  <header class="seccion__cabecera">
+    <p class="seccion__numero">05</p>
+    <h2 class="seccion__titulo">Metodología y recursos</h2>
+  </header>
+
+  <div class="bloque">
+    <h3>Cómo se trabaja</h3>
+    <ul>
+      <li><strong>Se pregunta antes de explicar.</strong> <span class="marcador">[Cómo arranca cada unidad]</span></li>
+      <li><strong><span class="marcador">[Datos y normas, no opiniones]</span>.</strong> Las afirmaciones se apoyan en fuentes citadas —<span class="marcador">[fuentes principales]</span>— <span class="marcador">[y quién revisa la parte técnica o legal]</span>.</li>
+      <li><strong>Del caso a la regla.</strong> <span class="marcador">[Ejemplos de situaciones cotidianas sobre las que el grupo decide]</span></li>
+      <li><strong>Participa todo el mundo.</strong> <span class="marcador">[Mano alzada, equipos, desplazamiento por el aula…]</span></li>
+      <li><strong>Cierre en acción.</strong> <span class="marcador">[Con qué termina el programa]</span></li>
+    </ul>
+  </div>
+
+  <div class="rejilla-2">
+    <div class="bloque">
+      <h3>Qué aporta el programa</h3>
+      <ul>
+        <li><strong>Presentación interactiva proyectable</strong> de las <span class="marcador">[N]</span> unidades, con
+            encuestas a mano alzada, casos con veredicto, tarjetas que se voltean y
+            temporizadores de actividad. Funciona sin conexión a internet.</li>
+        <!-- GUÍA: un <li> por material de aula real, con la unidad entre paréntesis. -->
+        <li><strong><span class="marcador">[Material de aula]</span></strong> <span class="marcador">[para qué]</span> (unidad <span class="marcador">[N]</span>).</li>
+        <li><strong><span class="marcador">[Material de aula]</span></strong> <span class="marcador">[para qué]</span> (unidad <span class="marcador">[N]</span>).</li>
+        <li><strong><span class="marcador">[Rúbrica de evaluación y modelo de certificado]</span></strong></li>
+      </ul>
+    </div>
+
+    <div class="bloque">
+      <h3>Qué necesita del centro</h3>
+      <ul>
+        <li><strong>Un aula con proyector</strong> o pizarra digital<span class="marcador">[, y espacio para moverse si hay dinámicas de posicionamiento]</span>.</li>
+        <li><strong><span class="marcador">[N horas]</span></strong> <span class="marcador">[en una misma jornada / en N sesiones]</span> para el grupo-clase.</li>
+        <li><strong>Un grupo-clase completo</strong> y la presencia del profesorado responsable del grupo, conforme a la normativa del centro.</li>
+        <li><span class="marcador">[Material que aporta el centro, si lo hay; si no, decirlo]</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="bloque bloque--ancho">
+    <h3>Qué ocurre después de la sesión</h3>
+    <ul>
+      <li>El centro se queda con <span class="marcador">[productos del alumnado y certificados]</span>; una copia queda a disposición de <span class="marcador">[la institución]</span>.</li>
+      <li><span class="marcador">[Seguimiento posible en tutoría]</span></li>
+      <li>Al cierre del curso, <span class="marcador">[la institución]</span> recibe la <strong>memoria final</strong>.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ==================== 6. CALENDARIO ==================== -->
+<!-- GUÍA: tabla de cinco fases con [fechas] (acuerdo, contacto con centros,
+     piloto, extensión, evaluación y memoria), ritmo de impartición y reparto
+     de lo que aporta cada parte. La tabla no se parte entre páginas. -->
+<section class="hoja">
+  <header class="seccion__cabecera">
+    <p class="seccion__numero">06</p>
+    <h2 class="seccion__titulo">Calendario propuesto</h2>
+  </header>
+
+  <p class="entradilla">
+    Propuesta de despliegue para el curso <span class="marcador">[curso escolar]</span>: una fase
+    piloto corta en el primer trimestre, que permita ajustar tiempos y materiales con datos
+    reales, y la extensión al resto de centros durante el segundo y el tercero.
+  </p>
+
+  <table class="tabla">
+    <thead>
+      <tr><th>Fase</th><th>Fechas</th><th>Contenido</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Acuerdo y planificación</td>
+        <td><span class="marcador">[fechas]</span></td>
+        <td>Aprobación de la propuesta, designación del interlocutor en <span class="marcador">[área]</span> y selección de los centros participantes.</td>
+      </tr>
+      <tr>
+        <td>Contacto con los centros</td>
+        <td><span class="marcador">[fechas]</span></td>
+        <td>Presentación del programa a las direcciones y a los equipos de tutoría; reserva de fechas y aulas.</td>
+      </tr>
+      <tr>
+        <td>Fase piloto<br><span class="tabla__nota">Primer trimestre</span></td>
+        <td><span class="marcador">[fechas]</span></td>
+        <td>Impartición en <span class="marcador">[nº]</span> centros. Ajuste de tiempos, materiales y ejemplos locales a partir de la experiencia real, e informe breve de resultados.</td>
+      </tr>
+      <tr>
+        <td>Extensión al resto del curso<br><span class="tabla__nota">Segundo y tercer trimestre</span></td>
+        <td><span class="marcador">[fechas]</span></td>
+        <td>Despliegue en los centros restantes: <span class="marcador">[nº]</span> grupos-clase, a razón de <span class="marcador">[unidad de despliegue]</span> por grupo.</td>
+      </tr>
+      <tr>
+        <td>Evaluación y memoria</td>
+        <td><span class="marcador">[fechas]</span></td>
+        <td>Cuestionarios al alumnado y al profesorado, recopilación de los productos del alumnado y memoria final.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="bloque">
+    <h3>Ritmo de impartición</h3>
+    <p>
+      La unidad de despliegue es siempre la misma: <strong><span class="marcador">[una jornada de N horas / N sesiones]</span> por
+      grupo-clase</strong>. Un centro con varios grupos del mismo nivel recibe tantas
+      <span class="marcador">[jornadas]</span> como grupos, en días distintos o consecutivos según su disponibilidad.
+      Las fechas concretas se cierran con cada dirección a través del interlocutor que designe
+      <span class="marcador">[la institución]</span>, procurando no coincidir con periodos de evaluación.
+    </p>
+  </div>
+
+  <div class="rejilla-2">
+    <div class="bloque">
+      <h3>Qué aporta <span class="marcador">[la institución]</span></h3>
+      <ul>
+        <li>La aprobación y la financiación del programa para el curso.</li>
+        <li>Un interlocutor único y la carta de presentación a los centros.</li>
+        <li>La relación de centros y niveles a los que se quiere llegar.</li>
+        <li><span class="marcador">[La difusión de los productos del alumnado, si procede]</span></li>
+      </ul>
+    </div>
+    <div class="bloque">
+      <h3>Qué aporta el programa</h3>
+      <ul>
+        <li>La coordinación directa con cada dirección y equipo de tutoría.</li>
+        <li>La impartición de las sesiones, con todos los materiales incluidos.</li>
+        <li><span class="marcador">[La evaluación del alumnado y los certificados]</span></li>
+        <li>Un informe tras la fase piloto y una memoria final al cierre del curso.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 7. PRESUPUESTO ==================== -->
+<!-- GUÍA: TODOS los importes quedan como [importe] hasta que el autor los dé.
+     Conceptos: impartición por grupo-clase, materiales por grupo, preparación
+     por programa, desplazamientos por sesión (añade o quita filas según el
+     caso). El impuesto es IGIC en Canarias (7 % general) e IVA en el resto
+     (o exención educativa, si el autor la confirma): no lo decidas tú. -->
+<section class="hoja">
+  <header class="seccion__cabecera">
+    <p class="seccion__numero">07</p>
+    <h2 class="seccion__titulo">Presupuesto</h2>
+  </header>
+
+  <p class="entradilla">
+    El presupuesto se construye sobre una unidad única y fácil de auditar:
+    <span class="marcador">[la jornada de N horas / la sesión]</span> por grupo-clase. Los importes se cierran con
+    <span class="marcador">[la institución]</span> en función del número de centros y grupos que finalmente se acuerden.
+  </p>
+
+  <table class="tabla tabla--importes">
+    <thead>
+      <tr><th>Concepto</th><th>Unidad</th><th class="num">Precio unitario</th><th class="num">Importe</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Impartición de <span class="marcador">[la jornada completa (N unidades · N h)]</span></td>
+        <td>Por grupo-clase</td>
+        <td class="num"><span class="marcador">[importe]</span> €</td>
+        <td class="num"><span class="marcador">[importe]</span> €</td>
+      </tr>
+      <tr>
+        <td>Materiales del alumnado: <span class="marcador">[lista de materiales de aula]</span></td>
+        <td>Por grupo-clase</td>
+        <td class="num"><span class="marcador">[importe]</span> €</td>
+        <td class="num"><span class="marcador">[importe]</span> €</td>
+      </tr>
+      <tr>
+        <td>Preparación, adaptación al ámbito local y coordinación con los centros</td>
+        <td>Por programa</td>
+        <td class="num"><span class="marcador">[importe]</span> €</td>
+        <td class="num"><span class="marcador">[importe]</span> €</td>
+      </tr>
+      <tr>
+        <td>Desplazamientos a los centros</td>
+        <td>Por <span class="marcador">[jornada]</span></td>
+        <td class="num"><span class="marcador">[importe]</span> €</td>
+        <td class="num"><span class="marcador">[importe]</span> €</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr><th colspan="3">Base imponible</th><td class="num"><span class="marcador">[importe]</span> €</td></tr>
+      <tr><th colspan="3"><span class="marcador">[IGIC/IVA]</span> (<span class="marcador">[%]</span>)</th><td class="num"><span class="marcador">[importe]</span> €</td></tr>
+      <tr class="total"><th colspan="3">TOTAL</th><td class="num"><span class="marcador">[importe]</span> €</td></tr>
+    </tfoot>
+  </table>
+
+  <div class="bloque nota">
+    <h3>Ejemplo orientativo de cálculo</h3>
+    <p class="formula">
+      (n.º de grupos-clase × precio por <span class="marcador">[jornada]</span>)
+      + (n.º de grupos-clase × materiales por grupo)
+      + preparación y adaptación al ámbito local
+      + (n.º de <span class="marcador">[jornadas]</span> × desplazamiento)<br>
+      <span class="formula__total">= base imponible, sobre la que se aplica el <span class="marcador">[%]</span> de <span class="marcador">[IGIC/IVA]</span>.</span>
+    </p>
+    <p>
+      Duplicar el número de grupos duplica la partida principal; la preparación se paga una sola
+      vez por programa. <span class="marcador">[La institución]</span> puede así dimensionar la actuación al crédito disponible
+      sin renegociar la propuesta.
+    </p>
+  </div>
+
+  <div class="bloque">
+    <h3>Condiciones</h3>
+    <ul>
+      <li>Se factura por <span class="marcador">[jornadas]</span> efectivamente impartidas, previa conformidad del centro y de
+          <span class="marcador">[la institución]</span>.</li>
+      <li>Régimen fiscal conforme a la normativa vigente: <span class="marcador">[IGIC/IVA, tipo aplicable o exención]</span>.</li>
+      <li>El precio incluye presentación, materiales del alumnado, evaluación, certificados y
+          memoria final. <span class="marcador">[Qué no incluye, si procede]</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ==================== 8. SOBRE LOS AUTORES ==================== -->
+<!-- GUÍA: entradilla sobre los papeles complementarios y un bloque por autor:
+     nombre, rol, un párrafo sobre lo que aporta AL PROGRAMA (esto sí se puede
+     redactar a partir del material) y una ficha con trayectoria, experiencia,
+     motivación y requisitos, todo como marcador si no lo ha dado el autor.
+     Termina con las fuentes en las que se apoya el programa, tal cual se citan. -->
+<section class="hoja">
+  <header class="seccion__cabecera">
+    <p class="seccion__numero">08</p>
+    <h2 class="seccion__titulo">Sobre los autores</h2>
+  </header>
+
+  <p class="entradilla">
+    <span class="marcador">[Quién firma el programa y cómo se reparten los papeles: quien lo diseña e imparte, y quien garantiza la exactitud técnica o legal]</span>.
+  </p>
+
+  <div class="autor">
+    <h3 class="autor__nombre"><span class="marcador">[Nombre del autor o autora]</span></h3>
+    <p class="autor__rol">Promotor/a, autor/a y responsable de la impartición · <span class="marcador">[lugar]</span></p>
+    <p>
+      <span class="marcador">[Qué ha diseñado (unidades, presentación, dinámicas) y qué asume (impartición, coordinación, evaluación, memoria)]</span>.
+    </p>
+    <dl class="ficha">
+      <dt>Trayectoria</dt><dd><span class="marcador">[formación y experiencia profesional relevante]</span></dd>
+      <dt><span class="marcador">[Ámbito del programa]</span></dt><dd><span class="marcador">[experiencia en el ámbito: voluntariado, colaboraciones…]</span></dd>
+      <dt>Experiencia en el aula</dt><dd><span class="marcador">[charlas, talleres o programas impartidos previamente]</span></dd>
+      <dt>Por qué este programa</dt><dd><span class="marcador">[motivación personal en dos o tres líneas]</span></dd>
+      <dt>Requisitos</dt><dd><span class="marcador">[alta como autónomo, seguro de responsabilidad civil y certificado negativo de delitos de naturaleza sexual]</span></dd>
+    </dl>
+  </div>
+
+  <!-- GUÍA: bloque del coautor/a; bórralo si no hay. -->
+  <div class="autor">
+    <h3 class="autor__nombre"><span class="marcador">[nombre completo del coautor/a]</span></h3>
+    <p class="autor__rol">Coautor/a de <span class="marcador">[qué contenidos]</span> · <span class="marcador">[cargo y organismo]</span></p>
+    <p>
+      <span class="marcador">[Qué aporta al programa: de qué unidades es coautor/a y qué revisa]</span>.
+    </p>
+    <dl class="ficha">
+      <dt>Destino y funciones</dt><dd><span class="marcador">[unidad, destino y funciones]</span></dd>
+      <dt>Experiencia</dt><dd><span class="marcador">[años de servicio y experiencia en el ámbito]</span></dd>
+      <dt>Participación</dt><dd><span class="marcador">[confirmar si participa presencialmente y en qué condiciones]</span></dd>
+    </dl>
+  </div>
+
+  <div class="bloque bloque--ancho">
+    <h3>Fuentes en las que se apoya el programa</h3>
+    <ul>
+      <!-- GUÍA: una línea por fuente, nombre en negrita y para qué se usa. Solo las que cita el material. -->
+      <li><strong><span class="marcador">[Fuente]</span></strong>: <span class="marcador">[qué datos o normas se toman de ella]</span>.</li>
+      <li><strong><span class="marcador">[Fuente]</span></strong>: <span class="marcador">[qué datos o normas se toman de ella]</span>.</li>
+      <li><strong><span class="marcador">[Fuente]</span></strong>: <span class="marcador">[qué datos o normas se toman de ella]</span>.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ==================== 9. CONTACTO Y FIRMA ==================== -->
+<!-- GUÍA: datos de contacto (todo marcador salvo el nombre), documentación
+     disponible, lo que se solicita (reunión, aprobación, financiación: lo
+     mismo que en la carta) y firma con lugar y fecha. -->
+<section class="hoja">
+  <header class="seccion__cabecera">
+    <p class="seccion__numero">09</p>
+    <h2 class="seccion__titulo">Contacto y firma</h2>
+  </header>
+
+  <div class="rejilla-2">
+    <div class="bloque">
+      <h3>Datos de contacto</h3>
+      <dl class="ficha">
+        <dt>Nombre</dt><dd><span class="marcador">[Nombre del autor o autora]</span></dd>
+        <dt>Teléfono</dt><dd><span class="marcador">[teléfono]</span></dd>
+        <dt>Correo</dt><dd><span class="marcador">[correo electrónico]</span></dd>
+        <dt>Dirección</dt><dd><span class="marcador">[dirección postal]</span></dd>
+        <dt>NIF</dt><dd><span class="marcador">[NIF]</span></dd>
+      </dl>
+    </div>
+
+    <div class="bloque">
+      <h3>Documentación disponible</h3>
+      <ul>
+        <li>Presentación interactiva completa de las <span class="marcador">[N]</span> unidades, para su visionado por parte
+            de <span class="marcador">[la institución]</span>.</li>
+        <li>Muestra de los materiales de aula: <span class="marcador">[cuáles]</span>.</li>
+        <li><span class="marcador">[Rúbrica de evaluación y modelo de certificado]</span></li>
+        <li>Currículum de los autores y certificados exigibles.
+            <span class="marcador">[adjuntar]</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="bloque nota bloque--ancho">
+    <h3>Lo que se solicita a <span class="marcador">[la institución]</span></h3>
+    <ul>
+      <li><strong>Una reunión</strong> con <span class="marcador">[cargo]</span> o con <span class="marcador">[área o concejalías]</span> para exponer el programa y mostrar los materiales.</li>
+      <li><strong>La aprobación</strong> de «<span class="marcador">[Título del programa]</span>» como actividad
+          <span class="marcador">[municipal / insular / autonómica]</span> dirigida a los centros educativos de <span class="marcador">[ámbito]</span>.</li>
+      <li><strong>La financiación</strong> del programa para el curso
+          <span class="marcador">[curso escolar]</span>, conforme al presupuesto del apartado 07.</li>
+    </ul>
+  </div>
+
+  <div class="cierre-firma">
+    <p>
+      Quedo a su entera disposición para ampliar cualquier punto de esta propuesta, para mostrar
+      la presentación y los materiales, o para concertar una reunión en la que exponerla
+      personalmente ante usted o ante <span class="marcador">[área o concejalías]</span>.
+    </p>
+    <p>Agradeciendo de antemano su atención, reciba un cordial saludo.</p>
+
+    <div class="firma firma--final">
+      <p class="firma__lugar"><span class="marcador">[Lugar]</span>, <span class="marcador">[fecha]</span></p>
+      <div class="firma__linea"></div>
+      <p class="firma__nombre"><span class="marcador">[Nombre del autor o autora]</span></p>
+      <p class="firma__meta">Promotor/a del programa «<span class="marcador">[Título del programa]</span>»</p>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
